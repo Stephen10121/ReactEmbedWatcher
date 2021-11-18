@@ -1,26 +1,34 @@
 import './App.css';
-import NameSet from './NameSet/NameSet';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-let name = "";
-function applyname(gname) {
-  name=gname;
-}
-function App() {
-  return (
-    <Router>
+import React, { Component } from 'react';
+import NameSet from './NameSet/NameSet';
+import Message from './Message/Message';
+
+class App extends Component {
+  state = {
+    name: ""
+  }
+
+  applyname = (iname) => {
+    this.setState({name: iname});
+  }
+
+  render() {
+    return (
+      <Router>
       <div className="App">
         <Switch>
           <Route exact path="/">
-            <NameSet giveName={applyname}/>
+            <NameSet giveName={this.applyname}/>
           </Route>
           <Route path="/message">
-            No Header{name}
+            <Message name={this.state.name}/>
           </Route>
         </Switch>
       </div>
     </Router>
-    
-  );
+    );
+  }
 }
 
 export default App;
