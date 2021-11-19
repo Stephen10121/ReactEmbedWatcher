@@ -1,5 +1,5 @@
 // Set port to 80 for development, 443 for production
-const PORT = 80;
+const PORT = 443;
 let https;
 if (PORT == 80) {
   https = require("http");
@@ -38,7 +38,7 @@ if (PORT == 80) {
 }
 
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index2");
 });
 
 const io = socketio(server, {
