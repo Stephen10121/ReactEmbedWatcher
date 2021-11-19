@@ -13,9 +13,11 @@ const fs = require('fs');
 const cookieParser = require('cookie-parser')
 const socketio = require('socket.io');
 const app = express();
+const cors = require('cors');
 
 app.set('view engine', 'ejs');
 app.use(
+    cors(),
     express.json(),
     express.static('public'),
     express.urlencoded({ extended: true }),
@@ -39,11 +41,17 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-const io = socketio(server);
+const io = socketio(server, {
+    cors: {
+        origin: '*',
+        methods: ['GET', 'POST']
+    }
+});
 
 io.on('connection', socket => {
-    socket.on("message", (data) => {
-        io.emit("message", (data));
+    console.log(`New user: ${socket.id}`);
+    socket.on("message", (message2) => {
+        io.emit("message", message2);
     });
 });
 
