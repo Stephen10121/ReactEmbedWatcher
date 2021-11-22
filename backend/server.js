@@ -38,11 +38,11 @@ if (PORT == 80) {
 }
 
 app.get("/", (req, res) => {
-  res.render("index3");
+  res.render("index");
 });
 
 app.get("/message", (req, res) => {
-  res.render("index3");
+  res.render("index");
 });
 
 const io = socketio(server, {
