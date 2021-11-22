@@ -4,8 +4,8 @@ import { useHistory } from 'react-router-dom';
 import socketio from 'socket.io-client';
 const socket = socketio("https://www.gruzservices.com");
 
-const Message = (props) => {
-    const [name] = useState(props.name);
+const Message = () => {
+    const [name, changeName] = useState("");
     const [curtext, changeCurtext] = useState("");
     const [chat, changeChat] = useState([]);
     const [prevData, changePrevData] = useState("");
@@ -47,9 +47,18 @@ const Message = (props) => {
         });
     }
 
+    const localGet = () => {
+        if (localStorage.getItem("name") !== "") {
+            changeName(localStorage.getItem("name"));
+        } else {
+            history.push("/");
+        }
+    }
+
     const onStartup = useRef(() => {});
     onStartup.current = () => {
         checkIncomingData();
+        localGet();
     }
 
     useEffect(() => {
@@ -63,11 +72,11 @@ const Message = (props) => {
                 {renderChat()}
             </div>
             <form className="submitPart" onSubmit={onMessageSubmit}>
-                <input autocomplete="off" type="text" id="sendmessinput" onChange={(e)=>changeCurtext(e.target.value)} name="message" placeholder="Message:"/>
+                <input autoComplete="off" type="text" id="sendmessinput" onChange={(e)=>changeCurtext(e.target.value)} name="message" placeholder="Message:"/>
                 <input  type="submit" value="Send"/>
             </form>
             <div className="goHome">
-                <a href="/">Go Home</a>
+                <a href="/">Change Name</a>
             </div>
         </div>
     );

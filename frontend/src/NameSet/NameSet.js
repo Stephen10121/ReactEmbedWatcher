@@ -1,13 +1,12 @@
 import "./Name.css";
 import { useHistory } from 'react-router-dom';
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 
-const NameSet = (props) => {
+const NameSet = () => {
     const [name, setName] = useState("");
     const history = useHistory();
 
     const sendName = () => {
-        props.giveName(name);
         localStorage.setItem("name", name);
         history.push("/message");
     }
