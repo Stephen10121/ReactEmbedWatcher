@@ -11,8 +11,6 @@ const Message = (props) => {
     const [prevData, changePrevData] = useState("");
     const [history] = useState(useHistory());
 
-    const onTextChange = () => changeCurtext(document.getElementById("sendmessinput").value);
-
     const onMessageSubmit = (e) => {
         e.preventDefault();
         if (name === "") {
@@ -65,7 +63,7 @@ const Message = (props) => {
                 {renderChat()}
             </div>
             <form className="submitPart" onSubmit={onMessageSubmit}>
-                <input autocomplete="off" type="text" id="sendmessinput" onChange={onTextChange} name="message" placeholder="Message:"/>
+                <input autocomplete="off" type="text" id="sendmessinput" onChange={(e)=>changeCurtext(e.target.value)} name="message" placeholder="Message:"/>
                 <input  type="submit" value="Send"/>
             </form>
             <div className="goHome">
