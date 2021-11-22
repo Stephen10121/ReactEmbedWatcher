@@ -55,7 +55,7 @@ const io = socketio(server, {
 io.on('connection', socket => {
     console.log(`New user: ${socket.id}`);
     socket.on("message", (message2) => {
-        io.emit("message", message2);
+      io.emit("message", message2);
     });
 });
 

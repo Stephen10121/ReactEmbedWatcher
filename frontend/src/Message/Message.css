@@ -22,19 +22,26 @@
 }
 
 .chatbox {
-  width: 99%;
-  background-color: #00fc37;
-  display: flex;
-  align-items: center;
-  padding: 10px 5px;
-  margin: 5px 0;
+  width: calc(100% -10px);
+  background-color: #8ab4f8;
+  padding-top: 3px;
+  padding-left: 5px;
+  padding-bottom: 3px;
+  margin: 5px 5px;
   white-space: initial;
+  border-radius: 5px;
 }
+
+.chatbox p {
+  font-family: var(--accent-font);
+  font-size: 0.7rem;
+}
+
 .chatbox h4 {
-  margin-left: 5px;
-  margin-top: 2px;
   white-space: initial;
   word-wrap: break-word;
+  margin-top: 4px;
+  margin-left: 5px;
 }
 
 .h1part {
@@ -112,4 +119,5 @@
 .goHome a {
   text-decoration: none;
   color: black;
+  font-size: 0.8rem;
 }

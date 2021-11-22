@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from 'react-router-dom';
 import socketio from 'socket.io-client';
 const socket = socketio("https://www.gruzservices.com");
+//const socket = socketio("http://192.168.0.24");
 
 const Message = () => {
     const [name, changeName] = useState("");
@@ -16,22 +17,23 @@ const Message = () => {
         if (name === "") {
             history.push("/");
         } else {
-            socket.emit("message", `${name},${curtext}`);
+            socket.emit("message", {mName: name, mText: curtext});
             document.getElementById("sendmessinput").value = "";
         }
     }
 
     const addChat = (data) => {
-        const [newName, newMessage] = data.split(",");
+        const newName = data.mName;
+        const newMessage = data.mText;
         let chat2 = chat;
-        chat2.push(`${newName}:${newMessage}`);
+        chat2.push({cachedName: newName, cachedMessage: newMessage});
         changeChat(chat2);
     }
 
     const renderChat = () => {
         return chat.map((message, index) => (
             <div className="chatbox" key={index}>
-                <h3>{message.split(":")[0]}:</h3><h4>{message.split(":")[1]}</h4>
+                <p>{message.cachedName}</p><h4>{message.cachedMessage}</h4>
             </div>
         ));
     }

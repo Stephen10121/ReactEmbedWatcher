@@ -10,11 +10,13 @@ body {
 * {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: var(--main-font);
 }
 
 :root {
   --header-color: #f3f3f3;
+  --main-font: "Roboto", sans-serif;
+  --accent-font: "Roboto Mono", monospace;
 }
 
 ::-webkit-scrollbar {
