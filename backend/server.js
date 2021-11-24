@@ -1,11 +1,6 @@
 // Set port to 80 for development, 443 for production
-const PORT = 443;
-let https;
-if (PORT == 80) {
-  https = require("http");
-} else {
-  https = require("https");
-}
+const PORT = 5000;
+const https = require("http");
 // Import modules
 const express = require('express');
 const path = require('path');
@@ -24,18 +19,13 @@ app.use(
     cookieParser()
     );
 
-let server;
-if (PORT == 80) {
-  server = https.createServer(app);
-} else {
-  server = https.createServer(
+let server = https.createServer(
       {
           key: fs.readFileSync(path.join(__dirname,"key.key")),
           cert: fs.readFileSync(path.join(__dirname,"cert.crt"))
       },
       app
   );
-}
 
 app.get("/", (req, res) => {
   res.render("index");
